@@ -1,4 +1,4 @@
-interface.sv
+
 interface sdpram_if#(
 
         parameter DATA_WIDTH = 32,
