@@ -49,9 +49,7 @@ module simple_dual_port_ram_tb();
    logic rst;
   localparam clk_period =1000;
    //sdpram_if #(32, 1024, 0) sdpram_inst(.clk(clk),.rst(rst),.sdp_s(ifp));
-  sdpram_if #(32,1024,0) sdpram_if_inst(
-    .clk(clk),
-    .rst(rst));
+  sdpram_if #(32,1024,0) sdpram_if_inst();
 
  simple_dual_port_ram  dut(
     .clk(clk),
