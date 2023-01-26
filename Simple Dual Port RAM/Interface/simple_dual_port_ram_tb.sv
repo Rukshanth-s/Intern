@@ -56,7 +56,7 @@ module simple_dual_port_ram_tb();
  simple_dual_port_ram  dut(
     .clk(clk),
     .rst(rst),
-    .ifp(sdpram_inst)
+         .ifp(sdpram_if_inst)
 );
 /* initial begin
        clk=1'b1;
@@ -72,11 +72,11 @@ end
 
             
      initial begin
-       ifp.dina= 32'h 55;
-       ifp.addra= 10'h 01;
-       ifp.wena =1;
-       ifp.renb =1;
-       ifp.addrb =10'h 01;
+       sdpram_if_inst.dina= 32'h 55;
+       sdpram_if_inst.addra= 10'h 01;
+       sdpram_if_inst.wena =1;
+       sdpram_if_inst.renb =1;
+       sdpram_if_inst.addrb =10'h 01;
      end
   
   initial begin
