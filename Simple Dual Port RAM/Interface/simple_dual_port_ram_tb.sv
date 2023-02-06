@@ -26,10 +26,11 @@ module simple_dual_port_ram_tb();
  	randomize(g.wena) with {g.wena inside{ [0:2**sdpram_if_inst.STRB_WIDTH]};};
 	g.dina = $random;
 
-      	#(CLK_PERIOD *2);
-      	sdpram_if_inst.wena = g.wena;
-	sdpram_if_inst.addra = g.addra;
-	sdpram_if_inst.dina= g.dina;
+      	
+      	sdpram_if_inst.wena <= g.wena;
+	sdpram_if_inst.addra <= g.addra;
+	sdpram_if_inst.dina <= g.dina;
+	  @(posedge clk);
       	if (g.wena)
         	mem_chk[g.addra] = g.dina;  
     	end
@@ -38,11 +39,11 @@ module simple_dual_port_ram_tb();
   initial begin 
     for(int i=0; i<REPITITIONS;i++) begin
     	randomize(g.addrb) with {g.addrb inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
-    	#(CLK_PERIOD *2);
-    	sdpram_if_inst.renb=1;
-    	sdpram_if_inst.addrb = g.addrb;
+    	
+    	sdpram_if_inst.renb <= 1;
+    	sdpram_if_inst.addrb <= g.addrb;
     	@(posedge clk);
-	# (CLK_PERIOD * 2.5);
+	
       	a1 :assert (mem_chk[g.addrb]===sdpram_if_inst.doutb ) $display("[PASS] Addr = %0h,\n \t   Data :: Expected = %0h Actual = %0h",g.addrb,mem_chk[g.addrb],sdpram_if_inst.doutb);  //assertion to check whether read data is correct
     else $error("[FAIL] Addr = %0h,\n \t   Data :: Expected = %0h Actual = %0h",g.addrb,mem_chk[g.addrb],sdpram_if_inst.doutb);
     end
