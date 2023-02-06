@@ -1,7 +1,7 @@
 `include "interface.sv";
 `include "generator.sv";
 module simple_dual_port_ram_tb();
-  logic clk;
+  logic clk =1'b 1;
   logic rst;
   localparam CLK_PERIOD = 10;
   localparam REPITITIONS =100;
@@ -15,9 +15,7 @@ module simple_dual_port_ram_tb();
   );
   
   always #(CLK_PERIOD/2) clk=~clk;
-  initial begin
-    clk=1'b1;
-  end
+  
     
   logic [sdpram_if_inst.DATA_WIDTH-1:0] mem_chk [sdpram_if_inst.MEM_DEPTH];
   initial begin
@@ -47,9 +45,9 @@ module simple_dual_port_ram_tb();
     	@(posedge clk);
 	# (CLK_PERIOD * 2.5);
       	a1 :assert (mem_chk[g.addrb]===sdpram_if_inst.doutb ) $display("[PASS] Addr = %0h,\n \t   Data :: Expected = %0h Actual = %0h",g.addrb,mem_chk[g.addrb],sdpram_if_inst.doutb);  //assertion to check whether read data is correct
-      else $error("[FAIL] Addr = %0h,\n \t   Data :: Expected = %0h Actual = %0h",g.addrb,mem_chk[g.addrb],sdpram_if_inst.doutb);
+    else $error("[FAIL] Addr = %0h,\n \t   Data :: Expected = %0h Actual = %0h",g.addrb,mem_chk[g.addrb],sdpram_if_inst.doutb);
     end
-   end
+  end
   
    initial begin
    	$dumpvars;
