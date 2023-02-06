@@ -4,7 +4,7 @@ module simple_dual_port_ram_tb();
   logic clk;
   logic rst;
   localparam CLK_PERIOD = 10;
-  localparam repititions =100;
+  localparam REPITITIONS =100;
   generator g;
   sdpram_if #(32,1024,0) sdpram_if_inst();
   simple_dual_port_ram  simple_dual_port_ram_inst(.clk(clk),.rst(rst),.ifp(sdpram_if_inst));
@@ -17,7 +17,7 @@ module simple_dual_port_ram_tb();
   logic [sdpram_if_inst.DATA_WIDTH-1:0] mem_chk [sdpram_if_inst.MEM_DEPTH];
   initial begin
   g=new();
-  for(int i=0;i<repititions;i++) begin
+  for(int i=0;i<REPITITIONS;i++) begin
   	randomize(g.addra) with {g.addra inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
        //randomize(g.dina) with {g.dina inside{ [0:2**10]};};
  	randomize(g.wena) with {g.wena inside{ [0:2**sdpram_if_inst.STRB_WIDTH]};};
@@ -34,7 +34,7 @@ module simple_dual_port_ram_tb();
   
   initial begin 
     g=new();
-    for(int i=0; i<repititions;i++) begin
+    for(int i=0; i<REPITITIONS;i++) begin
     	randomize(g.addrb) with {g.addrb inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
     	#(CLK_PERIOD *2);
     	sdpram_if_inst.renb=1;
