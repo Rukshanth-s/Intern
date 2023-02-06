@@ -21,10 +21,12 @@ module simple_dual_port_ram_tb();
   initial begin
   g=new();
   for(int i=0;i<REPITITIONS;i++) begin
-  	randomize(g.addra) with {g.addra inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
+  	//randomize(g.addra) with {g.addra inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
        //randomize(g.dina) with {g.dina inside{ [0:2**10]};};
- 	randomize(g.wena) with {g.wena inside{ [0:2**sdpram_if_inst.STRB_WIDTH]};};
+ 	//randomize(g.wena) with {g.wena inside{ [0:2**sdpram_if_inst.STRB_WIDTH]};};
 	g.dina = $random;
+	g.addra = $random;
+	g.wena = $random;
 
       	
       	sdpram_if_inst.wena <= g.wena;
@@ -38,8 +40,8 @@ module simple_dual_port_ram_tb();
   
   initial begin 
     for(int i=0; i<REPITITIONS;i++) begin
-    	randomize(g.addrb) with {g.addrb inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
-    	
+    	//randomize(g.addrb) with {g.addrb inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
+    	g.addrb = $random;
     	sdpram_if_inst.renb <= 1;
     	sdpram_if_inst.addrb <= g.addrb;
     	@(posedge clk);
