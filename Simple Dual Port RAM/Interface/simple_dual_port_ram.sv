@@ -33,16 +33,13 @@ module simple_dual_port_ram (
  
 
 //---------------------------------------------------------------------------------------------------------------------
-parameter DATA_WIDTH = 32;
-parameter ADDR_WIDTH = 10;
-parameter MEM_DEPTH = 1024;
 // Parameter / Headers
 
 //---------------------------------------------------------------------------------------------------------------------
-reg [DATA_WIDTH-1:0] ram [0:MEM_DEPTH-1];
-logic [DATA_WIDTH-1:0] doutb_reg;
+reg [ifp.DATA_WIDTH-1:0] ram [0:ifp.MEM_DEPTH-1];
+logic [ifp.DATA_WIDTH-1:0] doutb_reg;
 logic dvalb_reg;
-logic  [DATA_WIDTH-1:0] doutb_temp;
+logic  [ifp.DATA_WIDTH-1:0] doutb_temp;
 
  
 
