@@ -73,7 +73,7 @@ logic  [ifp.DATA_WIDTH-1:0] doutb_temp;
  end
 
 //assign ifp.doutb = doutb_reg;
-assign ifp.dvalb = dvalb_reg;
+//assign ifp.dvalb = dvalb_reg;
 
 endmodule
  
