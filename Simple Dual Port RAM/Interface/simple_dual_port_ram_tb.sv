@@ -36,7 +36,6 @@ module simple_dual_port_ram_tb();
   end
   
   initial begin 
-    g=new();
     for(int i=0; i<REPITITIONS;i++) begin
     	randomize(g.addrb) with {g.addrb inside{ [0:2**sdpram_if_inst.ADDR_WIDTH]};};
     	#(CLK_PERIOD *2);
