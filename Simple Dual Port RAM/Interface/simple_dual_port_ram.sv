@@ -54,25 +54,23 @@ logic  [ifp.DATA_WIDTH-1:0] doutb_temp;
 
 //---------------------------------------------------------------------------------------------------------------------
 
-always @(posedge clk) begin
-    if (rst) begin
-        for (int i = 0; i < MEM_DEPTH; i++) begin
-            ram[i] <= 0;
-        end
-        doutb_reg <= 0;
-        dvalb_reg <= 0;
-    end else begin
-        if (ifp.wena) begin
+ always @(posedge clk) begin
+    if (ifp.wena) begin
             ram[ifp.addra] <= ifp.dina;
-        end
-        if (ifp.renb) begin
-            doutb_temp <= ram[ifp.addrb];
-            doutb_reg <= doutb_temp;
-            ifp.doutb <= doutb_reg;
-            dvalb_reg <= 1;
-        end
     end
-end
+        
+          	//address <= ifp.addrb;
+     doutb_temp <= ram[ifp.addrb];
+     doutb_reg <= doutb_temp;
+     ifp.doutb <= doutb_reg;
+     dvalb_reg <= 1;
+     if (ram[ifp.addrb] == doutb_temp) begin
+     ifp.dvalb <= 1;
+     #10; 
+     ifp.dvalb <= 0;
+     end
+     else ifp.dvalb <= 0;
+ end
 
 //assign ifp.doutb = doutb_reg;
 assign ifp.dvalb = dvalb_reg;
