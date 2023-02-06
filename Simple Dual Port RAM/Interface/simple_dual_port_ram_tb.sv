@@ -7,7 +7,12 @@ module simple_dual_port_ram_tb();
   localparam REPITITIONS =100;
   generator g;
   sdpram_if #(32,1024,0) sdpram_if_inst();
-  simple_dual_port_ram  simple_dual_port_ram_inst(.clk(clk),.rst(rst),.ifp(sdpram_if_inst));
+  simple_dual_port_ram  
+  simple_dual_port_ram_inst(
+	  .clk(clk),
+	  .rst(rst),
+	  .ifp(sdpram_if_inst)
+  );
   
   always #(CLK_PERIOD/2) clk=~clk;
   initial begin
